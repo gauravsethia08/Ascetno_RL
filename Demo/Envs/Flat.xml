@@ -30,16 +30,15 @@
         <!-- <geom name='ramp_up' pos='2 1.2 0' quat="0.9914 0 -0.1306 0" size='1 1 0.00001' type='box' material='table_mat' />
 		<geom name='ramp_up_back' pos='-2 1.2 0' quat="0.9914 0 0.1306 0" size='1 1 0.00001' type='box' material='table_mat' />
         <geom name='ramp_straight_back' pos='-2 1.2 0' size='0.5 1 0.00001' type='box' material='table_mat' /> -->
-        <!-- <geom name='ramp_down' pos='-2 1.1 0' euler="0 0.1 0" size='1 1 0.00001' type='box' material='table_mat' /> -->
+        <!-- <geom name='ramp_down' pos='-2 1 0' euler="0 0.27 0" size='1 1 0.00001' type='box' material='table_mat' /> -->
         <light mode='trackcom' pos='0 0 5' dir='0 0 -1'/>
         <light directional='true' pos='0 0 3' dir='0 0 -1' diffuse='0.2 0.2 0.2' specular='0 0 0'/>
-		
-		<geom name='bump_1' pos='-2 0 0' euler="1.57 0 0" size='0.05 2' type='cylinder' material='table_mat' />
-        <geom name='bump_2' pos='-4 0 0' euler="1.57 0 0" size='0.05 2' type='cylinder' material='table_mat' />
-        <geom name='bump_3' pos='-6 0 0' euler="1.57 0 0" size='0.05 2' type='cylinder' material='table_mat' />
-        <geom name='bump_4' pos='-8 0 0' euler="1.57 0 0" size='0.05 2' type='cylinder' material='table_mat' />
-        <geom name='bump_5' pos='-10 0 0' euler="1.57 0 0" size='0.11 2' type='cylinder' material='table_mat' />
-		
+
+		<!-- <geom name='bump_1' pos='-2 0 0' euler="1.57 0 0" size='0.05 2' type='cylinder' material='table_mat' />
+        <geom name='bump_2' pos='-4 0 0' euler="1.57 0 0" size='0.07 2' type='cylinder' material='table_mat' />
+        <geom name='bump_3' pos='-6 0 0' euler="1.57 0 0" size='0.09 2' type='cylinder' material='table_mat' />
+        <geom name='bump_4' pos='-8 0 0' euler="1.57 0 0" size='0.11 2' type='cylinder' material='table_mat' /> -->
+        <!-- <geom name='bump_5' pos='-10 0 0' euler="1.57 0 0" size='0.13 2' type='cylinder' material='table_mat' /> -->
 		<!--Terrain-->
 		<!-- <geom name="terrain" type="hfield" hfield="terrain" rgba=".2 .3. 4 1" pos="0 0 0"/> -->
 

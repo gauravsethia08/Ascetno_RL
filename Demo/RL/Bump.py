@@ -99,7 +99,7 @@ class Ascento(mujoco_env.MujocoEnv, utils.EzPickle):
 
 		# Initializing the Mujoco GYM ENV
 		utils.EzPickle.__init__(self)
-		mujoco_env.MujocoEnv.__init__(self, "/home/gaurav/final_year_project/Ascetno_RL_Joint_Limited/ascento_joint_limited.xml", 2)
+		mujoco_env.MujocoEnv.__init__(self, "/home/gaurav/final_year_project/Ascetno_RL_Joint_Limited/Demo/Envs/Bump_RL.xml", 2)
 
 		self.action_space = spaces.Box(np.array([-1, -1, -1, -1]), np.array([1, 1, 1, 1]))
 

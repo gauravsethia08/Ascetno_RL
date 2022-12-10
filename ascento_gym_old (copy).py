@@ -12,16 +12,10 @@ def get_force(force_limit):
 	# print("Small force applied") 
 	sf = round(random.uniform(-force_limit, force_limit),2)
 	new_xfrc = [[0,0,0,0,0,0],
-				[sf*1.1,sf,0,0,0,0],
+				[sf,0,0,0,0,0],
 				[0,0,0,0,0,0],
 				[0,0,0,0,0,0],
-				[0,0,0,0,0,0],
-                [0,0,0,0,0,0],
-                [0,0,0,0,0,0],
-                [0,0,0,0,0,0],
-                [0,0,0,0,0,0],
-                [0,0,0,0,0,0],
-                [0,0,0,0,0,0]]
+				[0,0,0,0,0,0]]
 	return new_xfrc	
 	
 
@@ -67,8 +61,8 @@ class Ascento(mujoco_env.MujocoEnv, utils.EzPickle):
 		self.vpitch = 0
 		self.vyaw = 0
 
-		self.roll_pitch = []
-		self.pitch_pitch = []
+		self.roll_list = []
+		self.pitch_list = []
 		self.z_list = []
 
 		# Gains for rewards
@@ -82,7 +76,7 @@ class Ascento(mujoco_env.MujocoEnv, utils.EzPickle):
 		self.action_reward_constant = 0.25
 
 		# Defining the desired set point
-		self.desired_position = [-2, 0, 0.4]
+		self.desired_position = [2, 0, 0]
 
 		# Initial actions
 		self.left_hip_cmd = 0.0
@@ -125,7 +119,7 @@ class Ascento(mujoco_env.MujocoEnv, utils.EzPickle):
 		
 		# Applying force randomly
 		if self.apply_force:
-			rand_xfrc = get_force(random.randint(10, 30))
+			rand_xfrc = get_force(random.randint(0, 10))
 			self.sim.data.xfrc_applied[:] = rand_xfrc
 
 		# Doing simulation
@@ -142,7 +136,7 @@ class Ascento(mujoco_env.MujocoEnv, utils.EzPickle):
 		# Defining the reward
 		ref = -0.5
 		# reward = 0. -3*(0.4-self.z)**2 - 3*(ref - self.x)**2 - 3*(self.y)**2 - 50*(self.pitch)**2 - 50*(self.yaw)**2 -50*self.roll**2#- 0.01*(self.left_wheel_cmd**2 + self.right_wheel_cmd**2) - 0.1*(self.left_hip_cmd**2 + self.right_hip_cmd**2)
-		reward = 25 - 3*np.linalg.norm(ref - self.vx) - 50*(self.pitch)**2 - 50*(self.yaw)**2 - 10*np.linalg.norm(a[0:2]) - 0.1*np.linalg.norm(a[2:]) 
+		reward = 25*(self.ep_len/2000) - 3*np.linalg.norm(self.x - self.desired_position[0]) - 3*np.linalg.norm(self.z - self.desired_position[2]) - 50*(self.pitch)**2 - 2*np.linalg.norm(a[0:2]) - 0.1*np.linalg.norm(a[2:]) - 2*np.linalg.norm(a - [self.left_hip_cmd, self.right_hip_cmd, self.left_wheel_cmd, self.right_wheel_cmd])
 		# - 3*np.linalg.norm(self.y) - 3*np.linalg.norm(self.z)
 		# if abs(ref - self.x) < 0.2:
 		# 	reward+=15
@@ -176,8 +170,8 @@ class Ascento(mujoco_env.MujocoEnv, utils.EzPickle):
 		# Defining the terminating conditions
 		done = not (
             np.isfinite(ob).all() # -> True
-            and (abs(self.pitch) < 1.2) # -> True
-			and (abs(self.roll) < 1.2) # -> True
+            and (abs(self.pitch) < 1) # -> True
+			and (abs(self.roll) < 0.7808) # -> True
 			and (self.ep_len < 2500)
         )
 
@@ -307,16 +301,17 @@ class Ascento(mujoco_env.MujocoEnv, utils.EzPickle):
 		self.roll = eu[0]
 		self.pitch = eu[1]
 		self.yaw = eu[2] - 3.14
+		self.roll_list.append(math.degrees(eu[0]))
+		self.pitch_list.append(math.degrees(eu[1]))
+		self.z_list.append(self.z)
 		self.vroll = self.sim.data.qvel[3] 
 		self.vpitch = self.sim.data.qvel[4] # pitch'
 		self.vyaw = self.sim.data.qvel[5]
 
-		self.roll_pitch.append(math.degrees(eu[0]))
-		self.pitch_pitch.append(math.degrees(eu[1]))
-		self.z_list.append(self.z)
+		# print(self.pitch)
 		# self.prev_cmd = [self.left_wheel_cmd, self.right_wheel_cmd, self.left_hip_cmd, self.right_hip_cmd] # prev cmds
 
-		return np.concatenate(([self.x, self.y, self.z], 
+		return np.concatenate(([self.x - self.desired_position[0], self.y - self.desired_position[1], self.z - self.desired_position[2]], 
 								[self.roll, self.pitch, self.yaw], [self.vx, self.vy, self.vz],  
 								[self.vroll, self.vpitch, self.vyaw])).ravel()
 
