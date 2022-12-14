@@ -11,7 +11,7 @@ Source code for a reinforcement learning based controller for legged wheel robot
 </ol>
 
 ## Robot Design 
-<IMG>
+![Robot Design](Images/Robot Design.png)
 
 ## Controllers
 ### 1. PID
@@ -36,14 +36,57 @@ Source code for a reinforcement learning based controller for legged wheel robot
 
 ## Results
 ### 1. PID
-#### a. Flat Terrain
-#### b. On Ramp with Both Legs
-#### c. On Ramp with One Leg
-#### d. On Speed Hump
+<ol>
+  <li>Flat Terrain</li>
+  
+    ![PID Flat Terrain without External Disturbance](Images/Results/PID/flat_no_dis.png)
+  
+    ![PID Flat Terrain with External Disturbance](Images/Results/PID/flat_with_dis.png)
+  
+  <li>On Ramp with Both Legs</li>
 
+    ![PID On Ramp with both legs without External Disturbance](Images/Results/PID/ramp_2_no_dis.png)
+    
+    ![PID On Ramp with both legs with External Disturbance](Images/Results/PID/ramp_2_with_dis.png)
+
+  <li>On Ramp with One Leg</li>
+
+    ![PID On Ramp with one leg without External Disturbance](Images/Results/PID/ramp_1_no_dis.png)
+    
+    ![PID On Ramp with one leg with External Disturbance](Images/Results/PID/ramp_1_with_dis.png)
+  
+  <li>On Speed Hump</li>
+
+    ![PID Bump Terrain without External Disturbance](Images/Results/PID/bump_no_dis.png)
+    
+    ![PID Bump Terrain with External Disturbance](Images/Results/PID/bump_with_dis.png)
+
+</ol>
 
 ### 2. Reinforcement Learning
-#### a. Flat Terrain
-#### b. On Ramp with Both Legs
-#### c. On Ramp with One Leg
-#### d. On Speed Hump
+<ol>
+  <li>Flat Terrain</li>
+  
+    ![RL Flat Terrain without External Disturbance](Images/Results/RL/RL_Flat_NED.jpg)
+  
+    ![RL Flat Terrain with External Disturbance](Images/Results/RL/RL_Flat_ED.jpg)
+  
+  <li>On Ramp with Both Legs</li>
+
+    ![RL On Ramp with both legs without External Disturbance](Images/Results/RL/RL_Ramp_2_NED.jpg)
+    
+    ![RL On Ramp with both legs with External Disturbance](Images/Results/RL/RL_Ramp_2_ED.jpg)
+
+  <li>On Ramp with One Leg</li>
+
+    ![RL On Ramp with one leg without External Disturbance](Images/Results/RL/RL_Ramp_1_NED.jpg)
+    
+    ![RL On Ramp with one leg with External Disturbance](Images/Results/RL/RL_Ramp_1_ED.jpg)
+  
+  <li>On Speed Hump</li>
+
+    ![RL Bump Terrain without External Disturbance](Images/Results/RL/RL_Bump_NED.jpg)
+    
+    ![RL Bump Terrain with External Disturbance](Images/Results/RL/RL_Bump_ED.jpg)
+
+</ol>
